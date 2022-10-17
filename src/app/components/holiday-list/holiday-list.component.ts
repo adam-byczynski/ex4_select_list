@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { GetHolidayDataService } from '../../services/get-holiday-data.service';
-import {map, Observable} from "rxjs";
-import {HolidayDTOModel} from "../../models/holiday-dto.model";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-holiday-list',
@@ -13,10 +12,5 @@ import {HolidayDTOModel} from "../../models/holiday-dto.model";
 export class HolidayListComponent {
   constructor(private _getHolidayDataService: GetHolidayDataService) {
   }
-  holidays$: Observable<string[]> = this._getHolidayDataService.getHolidayData().pipe(
-    map(
-      (holidays: HolidayDTOModel[]) => holidays.map(
-        (holiday: HolidayDTOModel) => holiday.localName)
-    )
-  )
+  holidays$: Observable<string[]> = this._getHolidayDataService.getHolidayData();
 }
